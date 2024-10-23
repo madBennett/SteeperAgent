@@ -14,15 +14,15 @@ CXXFLAGS=-std=c++11 -Wall -g3 -c -g
 OBJS = TeaTimer.o main.o
 
 # Program name
-PROGRAM = SteeperAgent
+PROGRAM = steeperAgent
 
 $(PROGRAM) : $(OBJS)
 	$(CXX) -o $(PROGRAM) $^
 
-parser.o : TeaTimer.h TeaTimer.cpp
+TeaTimer.o : TeaTimer.h TeaTimer.cpp
 	$(CXX) $(CXXFLAGS) TeaTimer.cpp
 
-Source.o : TeaTimer.h main.cpp
+main.o : TeaTimer.h main.cpp
 	$(CXX) $(CXXFLAGS) main.cpp
 	
 clean :
