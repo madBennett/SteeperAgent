@@ -13,8 +13,8 @@ id: 824800113
 #include <unistd.h>
 #include <iostream>
 
-enum TeaType {BLACK, GREEN, WHITE, HERBAL};
-enum TeaStrength {WEAK, MODERATE, STRONG};
+enum TeaType {BLACK, GREEN, WHITE, HERBAL, TYPE_NA};
+enum TeaStrength {WEAK, MODERATE, STRONG, STRENGTH_NA};
 enum  Data {TEMPATURE, TIME};
 
 class TeaTimer
@@ -25,6 +25,7 @@ class TeaTimer
 
 
         static const int numTeaType = 4;
+        static const int numTeaStrength = 3;
         static const int teaData[numTeaType][3][2];//TODO::REMOVE MAGIC NUMBERS
         
     private:
