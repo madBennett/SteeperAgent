@@ -33,6 +33,7 @@ void TeaTimer::start()
     int i = 0;
     do
     {
+        system("clear");
         std::cout << "Select Tea type\n\t1. Black \n\t2. Green \n\t3. White \n\t4.Herbal \n\t 5.Quit \n->";
         std::cin >> i;
 
@@ -41,10 +42,12 @@ void TeaTimer::start()
             selTea = (TeaType)(i - 1);
         }
     } while (i <= 0 || i > 5);
+    
 
     //get tea strength
     do
     {
+        system("clear");
         std::cout << "Select Tea Strength\n\t1. Weak \n\t2. Moderate \n\t3. Strong \n\t4.Quit \n->";
         std::cin >> i;
 
@@ -53,6 +56,8 @@ void TeaTimer::start()
             selStrength = (TeaStrength)(i - 1);
         }
     } while (i <= 0 || i > 4);
+
+    system("clear");
 
     
 }
