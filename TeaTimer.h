@@ -20,20 +20,22 @@ enum  Data {TEMPATURE, TIME};
 class TeaTimer
 {
     public:
-        TeaTimer();
         void start();
 
 
         static const int numTeaType = 4;
         static const int numTeaStrength = 3;
-        static const int teaData[numTeaType][3][2];//TODO::REMOVE MAGIC NUMBERS
+        static const int teaData[numTeaType][numTeaStrength][2];//TODO::REMOVE MAGIC NUMBERS
         
     private:
         TeaType selTea; //to hold the selected tea type
         TeaStrength selStrength; // to hold the selected strength for the tea
 
         TeaType getTeaType();
-        void startTimer();
+        TeaStrength getTeaStrength();
+        void startTimer(int time);
         int getTemp();
+        void soundAlarm();
+        void enterToCont();
 
 };
