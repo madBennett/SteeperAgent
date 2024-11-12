@@ -33,7 +33,7 @@ class TeaTimer
 
         TeaType getTeaType();
         TeaStrength getTeaStrength();
-        void startTimer(int time);
+        void startTimer(int timeMin);
         int getTemp();
         void soundAlarm();
         void enterToCont();

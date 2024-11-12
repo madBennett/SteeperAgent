@@ -36,8 +36,9 @@ void TeaTimer::start()
     while (getTemp() < steepTemp)
     {
         //waiting
-        std::cout << "Waiting for water to reach " << steepTemp << "degrees F\n" 
-            << "Current Temp: " << getTemp() << "degrees F" << std::endl;
+        std::cout << "Waiting for water to reach " << steepTemp << " degrees F\n" 
+            << "Current Temp: " << getTemp() << " degrees F" << std::endl;
+        sleep(1);
         system("clear");
         break;
     }
@@ -100,9 +101,11 @@ TeaStrength TeaTimer::getTeaStrength()
     return tStren;
 }
 
-void TeaTimer::startTimer(int time)
+void TeaTimer::startTimer(int timeMin)
 {
     //
+    std::cout << "Tea is steeping..." << std::endl;
+    sleep(timeMin * 60);
 }
 
 int TeaTimer::getTemp()
@@ -114,6 +117,7 @@ int TeaTimer::getTemp()
 void TeaTimer::soundAlarm()
 {
     //
+    //sound alarm and end enter or other key stroke
     enterToCont();
 }
 
