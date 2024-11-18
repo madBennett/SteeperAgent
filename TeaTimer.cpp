@@ -4,6 +4,9 @@ main source File
 Madison Bennett
 id: 824800113
 
+Alyssa Rivera
+id: 825469587
+
 ... addd yours
 
 
@@ -11,7 +14,8 @@ id: 824800113
 */
 
 #include "TeaTimer.h"
-
+#include <OneWire.h>
+#include <DallasTemperature.h>
 //map arrays
 const int TeaTimer::teaData[numTeaType][numTeaStrength][2] = {     //TODO::REMOVE MAGIC NUMBERS
     {{/*Weak*/ 200, 3}, {/*Moderate*/ 206, 4}, {/*Strong*/ 212, 5}}, //Black
@@ -22,7 +26,17 @@ const int TeaTimer::teaData[numTeaType][numTeaStrength][2] = {     //TODO::REMOV
 
 void TeaTimer::start()
 {
-    //
+    //initialize temperature sensor
+    //connect data wire to pin 4 on Arduino
+    const int oneWireBus = 4;
+    //setup oneWire instance
+    OneWire oneWire(oneWireBus);
+    //pass oneWire ref to Dallas Temp sensor
+    DallasTemperature sensors(&oneWire);
+
+    //initialize monitor and sensor
+    Serial.begin(9600);
+    sensors.begin();
 
     selTea = getTeaType();
     selStrength = getTeaStrength();
@@ -110,7 +124,12 @@ void TeaTimer::startTimer(int timeMin)
 
 int TeaTimer::getTemp()
 {
-    //
+    //call request temp method before getting val
+    sensors.requestTemperatures();
+
+    //get temperature in fahrenheit
+    float currTemp = sensors.getTempFByIndex(0);
+    delay(5000);
     return -1;
 }
 
