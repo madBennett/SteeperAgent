@@ -15,6 +15,8 @@ id: 825469587
 
 #include <unistd.h>
 #include <iostream>
+#include <string>
+#include "TemperatureReader.h"
 
 enum TeaType {BLACK, GREEN, WHITE, HERBAL, TYPE_NA};
 enum TeaStrength {WEAK, MODERATE, STRONG, STRENGTH_NA};
@@ -33,6 +35,7 @@ class TeaTimer
     private:
         TeaType selTea; //to hold the selected tea type
         TeaStrength selStrength; // to hold the selected strength for the tea
+        TemperatureReader tempReader; //to hold the temperature reader
 
         TeaType getTeaType();
         TeaStrength getTeaStrength();

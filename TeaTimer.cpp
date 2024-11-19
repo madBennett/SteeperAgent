@@ -14,8 +14,13 @@ id: 825469587
 */
 
 #include "TeaTimer.h"
-#include <OneWire.h>
-#include <DallasTemperature.h>
+#include <thread>
+#include <chrono>
+#include <limits>
+#include <filesystem>
+
+
+
 //map arrays
 const int TeaTimer::teaData[numTeaType][numTeaStrength][2] = {     //TODO::REMOVE MAGIC NUMBERS
     {{/*Weak*/ 200, 3}, {/*Moderate*/ 206, 4}, {/*Strong*/ 212, 5}}, //Black
@@ -27,16 +32,24 @@ const int TeaTimer::teaData[numTeaType][numTeaStrength][2] = {     //TODO::REMOV
 void TeaTimer::start()
 {
     //initialize temperature sensor
-    //connect data wire to pin 4 on Arduino
-    const int oneWireBus = 4;
-    //setup oneWire instance
-    OneWire oneWire(oneWireBus);
-    //pass oneWire ref to Dallas Temp sensor
-    DallasTemperature sensors(&oneWire);
+    //connect data wire 
+    const std::string baseDir = "/sys/bus/w1/devices/";
+    std::string deviceFolder;
 
-    //initialize monitor and sensor
-    Serial.begin(9600);
-    sensors.begin();
+    for (const auto& entry : std::filesystem::directory_iterator(baseDir)) {
+        if (entry.is_directory() && entry.path().string().find("28-") != std::string::npos) {
+            deviceFolder = entry.path().string();
+            break;
+        }
+    }
+
+    if (deviceFolder.empty()) {
+        throw std::runtime_error("Unable to find temperature sensor");
+    }
+
+    const std::string deviceFile = deviceFolder + "/w1_slave";
+
+    tempReader = TemperatureReader(deviceFile);
 
     selTea = getTeaType();
     selStrength = getTeaStrength();
@@ -47,14 +60,14 @@ void TeaTimer::start()
     int steepTime = teaData[selTea][selStrength][TIME];
 
     //wait for temp to be in range for steeping
-    while (getTemp() < steepTemp)
+    double currentTemp;
+    while (currentTemp = tempReader.getTemp() < steepTemp)
     {
         //waiting
         std::cout << "Waiting for water to reach " << steepTemp << " degrees F\n" 
-            << "Current Temp: " << getTemp() << " degrees F" << std::endl;
+            << "Current Temp: " << currentTemp << " degrees F" << std::endl;
         sleep(1);
         system("clear");
-        break;
     }
     
     soundAlarm();
@@ -120,17 +133,6 @@ void TeaTimer::startTimer(int timeMin)
     //
     std::cout << "Tea is steeping..." << std::endl;
     sleep(timeMin * 60);
-}
-
-int TeaTimer::getTemp()
-{
-    //call request temp method before getting val
-    sensors.requestTemperatures();
-
-    //get temperature in fahrenheit
-    float currTemp = sensors.getTempFByIndex(0);
-    delay(5000);
-    return -1;
 }
 
 void TeaTimer::soundAlarm()
