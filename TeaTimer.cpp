@@ -136,7 +136,8 @@ int TeaTimer::getTemp()
 void TeaTimer::soundAlarm()
 {
     //
-    //sound alarm and end enter or other key stroke
+    //sound alarm for 2 seconds
+    system("speaker-test -t sine -f 1000 -l 1 & sleep 2 && kill -9 $!");
     enterToCont();
 }
 
