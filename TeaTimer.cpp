@@ -22,11 +22,12 @@ id: 825469587
 
 
 //map arrays
-const int TeaTimer::teaData[numTeaType][numTeaStrength][2] = {     //TODO::REMOVE MAGIC NUMBERS
+const int TeaTimer::teaData[numTeaType][numTeaStrength][3] = {     //TODO::REMOVE MAGIC NUMBERS
     {{/*Weak*/ 200, 3}, {/*Moderate*/ 206, 4}, {/*Strong*/ 212, 5}}, //Black
     {{/*Weak*/ 140, 1}, {/*Moderate*/ 163, 2}, {/*Strong*/ 185, 3}}, //Green
     {{/*Weak*/ 160, 1}, {/*Moderate*/ 167, 2}, {/*Strong*/ 185, 3}}, //White
     {{/*Weak*/ 200, 5}, {/*Moderate*/ 200, 6}, {/*Strong*/ 200, 7}}, //Herbal
+    {{/*Weak*/ 80, 1}, {/*Moderate*/ 80, 1}, {/*Strong*/ 80, 1}} //Test
 };
 
 void TeaTimer::start()
