@@ -11,7 +11,7 @@ CXX=g++
 CXXFLAGS=-std=c++11 -Wall -g3 -c -g
 
 # object files
-OBJS = TeaTimer.o main.o
+OBJS = TemperatureReader.o TeaTimer.o main.o
 
 # Program name
 PROGRAM = steeperAgent
@@ -19,10 +19,13 @@ PROGRAM = steeperAgent
 $(PROGRAM) : $(OBJS)
 	$(CXX) -o $(PROGRAM) $^
 
-TeaTimer.o : TeaTimer.h TeaTimer.cpp
+TemperatureReader.o : TemperatureReader.h TemperatureReader.cpp
+	$(CXX) $(CXXFLAGS) TemperatureReader.cpp
+
+TeaTimer.o : TemperatureReader.h TeaTimer.h TeaTimer.cpp
 	$(CXX) $(CXXFLAGS) TeaTimer.cpp
 
-main.o : TeaTimer.h main.cpp
+main.o : TemperatureReader.h TeaTimer.h main.cpp
 	$(CXX) $(CXXFLAGS) main.cpp
 	
 clean :

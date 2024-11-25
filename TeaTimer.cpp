@@ -61,14 +61,15 @@ void TeaTimer::start()
     int steepTime = teaData[selTea][selStrength][TIME];
 
     //wait for temp to be in range for steeping
-    double currentTemp;
-    while (currentTemp = tempReader.getTemp() < steepTemp)
+    double currentTemp = tempReader.getTemp();
+    while (currentTemp < steepTemp)
     {
         //waiting
         std::cout << "Waiting for water to reach " << steepTemp << " degrees F\n" 
             << "Current Temp: " << currentTemp << " degrees F" << std::endl;
         sleep(1);
         system("clear");
+        currentTemp = tempReader.getTemp();
     }
     
     soundAlarm();

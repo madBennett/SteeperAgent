@@ -27,7 +27,6 @@ class TeaTimer
     public:
         void start();
 
-
         static const int numTeaType = 5;
         static const int numTeaStrength = 4;
         static const int teaData[numTeaType][numTeaStrength][3];//TODO::REMOVE MAGIC NUMBERS
