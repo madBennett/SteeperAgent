@@ -7,13 +7,13 @@ id: 824800113
 Alyssa Rivera
 id: 825469587
 
-... add yours
+Linh Tran
+id: 828187432
 
 
 
 */
 
-#include <unistd.h>
 #include <iostream>
 #include <string>
 #include "TemperatureReader.h"

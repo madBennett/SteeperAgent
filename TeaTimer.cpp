@@ -7,7 +7,8 @@ id: 824800113
 Alyssa Rivera
 id: 825469587
 
-... addd yours
+Linh Tran
+id: 828187432
 
 
 
@@ -17,6 +18,8 @@ id: 825469587
 #include <thread>
 #include <chrono>
 #include <limits>
+#include <thread>
+#include <chrono>
 #include <filesystem>
 
 
@@ -65,9 +68,8 @@ void TeaTimer::start()
     while (currentTemp < steepTemp)
     {
         //waiting
-        std::cout << "Waiting for water to reach " << steepTemp << " degrees F\n" 
-            << "Current Temp: " << currentTemp << " degrees F" << std::endl;
-        sleep(1);
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+            std::cout << "Current Temp: " << currentTemp << " degrees F" << std::endl;
         system("clear");
         currentTemp = tempReader.getTemp();
     }
@@ -134,7 +136,7 @@ void TeaTimer::startTimer(int timeMin)
 {
     //
     std::cout << "Tea is steeping..." << std::endl;
-    sleep(timeMin * 60);
+    std::this_thread::sleep_for(std::chrono::seconds(timeMin * 60));
 }
 
 void TeaTimer::soundAlarm()
