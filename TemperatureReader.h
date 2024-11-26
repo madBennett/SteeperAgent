@@ -9,9 +9,6 @@ id: 825469587
 
 Linh Tran
 id: 828187432
-
-
-
 */
 
 #ifndef TEMPERATURE_READER_H
@@ -29,6 +26,7 @@ class TemperatureReader {
         std::string getRawTemp() const;
 
     public:
+        TemperatureReader();
         //constructor to initialize device file path
         explicit TemperatureReader(const std::string& deviceFilePath);
 

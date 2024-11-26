@@ -5,10 +5,10 @@
 
 # CXX Make variable for compiler
 CXX=g++
-# -std=c++11  C/C++ variant to use, e.g. C++ 2011
+# -std=c++17  C/C++ variant to use, e.g. C++ 2017
 # -Wall       show the necessary warning files
 # -g3         include information for symbolic debugger e.g. gdb 
-CXXFLAGS=-std=c++11 -Wall -g3 -c -g
+CXXFLAGS=-std=c++17 -Wall -g3 -c -g
 
 # object files
 OBJS = TemperatureReader.o TeaTimer.o main.o

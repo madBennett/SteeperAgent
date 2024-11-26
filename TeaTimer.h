@@ -9,9 +9,6 @@ id: 825469587
 
 Linh Tran
 id: 828187432
-
-
-
 */
 
 #include <iostream>
@@ -25,6 +22,7 @@ enum  Data {TEMPATURE, TIME};
 class TeaTimer
 {
     public:
+        TeaTimer();
         void start();
 
         static const int numTeaType = 5;

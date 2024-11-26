@@ -9,9 +9,6 @@ id: 825469587
 
 Linh Tran
 id: 828187432
-
-
-
 */
 
 #include "TeaTimer.h"
@@ -32,6 +29,8 @@ const int TeaTimer::teaData[numTeaType][numTeaStrength][3] = {     //TODO::REMOV
     {{/*Weak*/ 200, 5}, {/*Moderate*/ 200, 6}, {/*Strong*/ 200, 7}}, //Herbal
     {{/*Weak*/ 80, 1}, {/*Moderate*/ 80, 1}, {/*Strong*/ 80, 1}} //Test
 };
+
+TeaTimer::TeaTimer(){}
 
 void TeaTimer::start()
 {

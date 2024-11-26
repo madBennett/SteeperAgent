@@ -9,12 +9,11 @@ id: 825469587
 
 Linh Tran
 id: 828187432
-
-
-
 */
 
 #include "TemperatureReader.h"
+
+TemperatureReader::TemperatureReader(){}
 
 TemperatureReader::TemperatureReader(const std::string& deviceFilePath) : deviceFile(deviceFilePath) {}
 
