@@ -40,11 +40,13 @@ double TemperatureReader::getTemp() const {
     std::string lines;
 
     do {
+        printf("gettuing raw data\n");
         lines = getRawTemp();
     } while (lines.find("YES") == std::string::npos);
 
     size_t equals_pos = lines.find("t=");
     if (equals_pos != std::string::npos) {
+        printf("extracting temp data\n");
         std::string temp_string = lines.substr(equals_pos + 2);
         double temp_c = std::stod(temp_string) / 1000.0; //get temp in celsius
         double temp_f = temp_c * 9.0 / 5.0 + 32.0; //convert to fahrenheit

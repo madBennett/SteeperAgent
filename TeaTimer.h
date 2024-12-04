@@ -27,12 +27,16 @@ class TeaTimer
 
         static const int numTeaType = 5;
         static const int numTeaStrength = 4;
-        static const int teaData[numTeaType][numTeaStrength][3];//TODO::REMOVE MAGIC NUMBERS
+        static const int dataPts = 2;
+        static const int teaData[numTeaType][numTeaStrength][dataPts];//TODO::REMOVE MAGIC NUMBERS
         
     private:
-        TeaType selTea; //to hold the selected tea type
-        TeaStrength selStrength; // to hold the selected strength for the tea
+        TeaType selTea = TYPE_NA; //to hold the selected tea type
+        TeaStrength selStrength = STRENGTH_NA; // to hold the selected strength for the tea
         TemperatureReader tempReader; //to hold the temperature reader
+
+        static const std::string TeaTypeStringKey[];
+        static const std::string TeaStrnStringKey[];
 
         TeaType getTeaType();
         TeaStrength getTeaStrength();
