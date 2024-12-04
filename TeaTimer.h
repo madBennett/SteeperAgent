@@ -11,6 +11,9 @@ Linh Tran
 id: 828187432
 */
 
+#ifndef TEA_TIMER_H
+#define TEA_TIMER_H
+
 #include <iostream>
 #include <string>
 #include <thread>
@@ -52,3 +55,5 @@ class TeaTimer
         void enterToCont();
 
 };
+
+#endif//TEA_TIMER_H
