@@ -13,6 +13,12 @@ id: 828187432
 
 #include <iostream>
 #include <string>
+#include <thread>
+#include <chrono>
+#include <limits>
+#include <thread>
+#include <chrono>
+
 #include "TemperatureReader.h"
 
 enum TeaType {BLACK, GREEN, WHITE, HERBAL, TYPE_NA};
@@ -23,12 +29,12 @@ class TeaTimer
 {
     public:
         TeaTimer();
-        void start();
+        void startAndExe();
 
-        static const int numTeaType = 5;
-        static const int numTeaStrength = 4;
-        static const int dataPts = 2;
-        static const int teaData[numTeaType][numTeaStrength][dataPts];//TODO::REMOVE MAGIC NUMBERS
+        static const int numTeaType = 5;//includes null values
+        static const int numTeaStrength = 4;//includes null values
+        static const int dataPts = 2;//Temp and time
+        static const int teaData[numTeaType][numTeaStrength][dataPts];
         
     private:
         TeaType selTea = TYPE_NA; //to hold the selected tea type

@@ -17,6 +17,7 @@ id: 828187432
 #include <string>
 #include <fstream>
 #include <stdexcept>
+#include <filesystem>
 
 class TemperatureReader {
     private:
@@ -26,7 +27,7 @@ class TemperatureReader {
         std::string getRawTemp() const;
 
     public:
-        TemperatureReader();
+        explicit TemperatureReader();
         //constructor to initialize device file path
         explicit TemperatureReader(const std::string& deviceFilePath);
 

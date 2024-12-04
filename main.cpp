@@ -16,6 +16,6 @@ id: 828187432
 int main(int argc, char* argv[])
 {
     TeaTimer timer;
-    timer.start();
+    timer.startAndExe();
     return 0;
 }

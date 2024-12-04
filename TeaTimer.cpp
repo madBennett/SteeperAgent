@@ -12,14 +12,6 @@ id: 828187432
 */
 
 #include "TeaTimer.h"
-#include <thread>
-#include <chrono>
-#include <limits>
-#include <thread>
-#include <chrono>
-#include <filesystem>
-
-
 
 //map arrays
 const int TeaTimer::teaData[numTeaType][numTeaStrength][dataPts] = {     
@@ -35,31 +27,16 @@ const std::string TeaTimer::TeaStrnStringKey[] = {"Weak", "Moderate", "Strong", 
 
 TeaTimer::TeaTimer(){}
 
-void TeaTimer::start()
+void TeaTimer::startAndExe()
 {
-    //initialize temperature sensor
-    //connect data wire 
-    const std::string baseDir = "/sys/bus/w1/devices/";
-    std::string deviceFolder;
+    //Function to start and exicute the steeper agent
+    //para: n/a
+    //returns: n/a
 
-    for (const auto& entry : std::filesystem::directory_iterator(baseDir)) {
-        if (entry.is_directory() && entry.path().string().find("28-") != std::string::npos) {
-            deviceFolder = entry.path().string();
-            break;
-        }
-    }
-
-    if (deviceFolder.empty()) {
-        throw std::runtime_error("Unable to find temperature sensor");
-    }
-
-    const std::string deviceFile = deviceFolder + "/w1_slave";
-
-    tempReader = TemperatureReader(deviceFile);
+    tempReader = TemperatureReader();
 
     selTea = getTeaType();
     selStrength = getTeaStrength();
-
 
     // get data for tea
     int steepTemp = teaData[selTea][selStrength][TEMPATURE];
@@ -97,7 +74,10 @@ void TeaTimer::start()
 
 TeaType TeaTimer::getTeaType()
 {
-    //
+    //Function to create menu and get the users tera type
+    //para: n/a
+    //returns: Selected tea type
+
     //get tea type
     TeaType tTyp;
     int i = 0;
@@ -132,7 +112,10 @@ TeaType TeaTimer::getTeaType()
 
 TeaStrength TeaTimer::getTeaStrength()
 {
-    //
+    //Function to create menu and get the users tea stregnth
+    //para: n/a
+    //returns: Selected tea strength
+
     //get tea strength
     TeaStrength tStren;
     int i = 0;
@@ -160,14 +143,19 @@ TeaStrength TeaTimer::getTeaStrength()
 
 void TeaTimer::startTimer(int timeMin)
 {
-    //
+    //Function to display text and start a timer
+    //para: n/a
+    //returns: N/a
     std::cout << "Tea is steeping..." << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(timeMin * 60));
 }
 
 void TeaTimer::soundAlarm()
 {
-    //
+    //Function to play beep for 2 seconds
+    //para: n/a
+    //returns: n/a
+
     //sound alarm for 2 seconds
     system("speaker-test -t sine -f 1000 -l 1 & sleep 2 && kill -9 $!");
     enterToCont();
@@ -175,7 +163,10 @@ void TeaTimer::soundAlarm()
 
 void TeaTimer::enterToCont()
 {
-    //
+    //Function to display text as intermediary
+    //para: n/a
+    //returns: N/a
+
     std::cout << "Press enter to continue ..." << std::endl;
     std::cin.ignore();
     std::cin.ignore();

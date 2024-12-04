@@ -13,11 +13,38 @@ id: 828187432
 
 #include "TemperatureReader.h"
 
-TemperatureReader::TemperatureReader(){}
+TemperatureReader::TemperatureReader()
+{
+    //Constructor to initialize temperature sensor
+    //para: n/a
+    //returns: n/a
+    
+    //connect data wire 
+    const std::string baseDir = "/sys/bus/w1/devices/";
+    std::string deviceFolder;
+
+    for (const auto& entry : std::filesystem::directory_iterator(baseDir)) {
+        if (entry.is_directory() && entry.path().string().find("28-") != std::string::npos) {
+            deviceFolder = entry.path().string();
+            break;
+        }
+    }
+
+    if (deviceFolder.empty()) {
+        throw std::runtime_error("Unable to find temperature sensor");
+    }
+
+    const std::string deviceFile = deviceFolder + "/w1_slave";
+}
 
 TemperatureReader::TemperatureReader(const std::string& deviceFilePath) : deviceFile(deviceFilePath) {}
 
-std::string TemperatureReader::getRawTemp() const {
+std::string TemperatureReader::getRawTemp() const 
+{
+    //Function to read the tempature sensors data with out processing it
+    //para: n/a
+    //returns: n/a
+
     //get device file
     std::ifstream file(deviceFile);
     //check if file opened successfully
@@ -36,7 +63,12 @@ std::string TemperatureReader::getRawTemp() const {
     return lines;
 }
 
-double TemperatureReader::getTemp() const {
+double TemperatureReader::getTemp() const 
+{
+    //Function to process the tempature sensors raw data 
+    //para: n/a
+    //returns: n/a
+
     std::string lines;
 
     do {
