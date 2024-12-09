@@ -45,7 +45,8 @@ void TeaTimer::startAndExe()
     //Display data
     std::cout << "Tea Data\n" << "\tTea Type: " << TeaTypeStringKey[selTea] 
         << "\n\tTea Strength: " << TeaStrnStringKey[selStrength] << "\n\t\tSteep Time: " << steepTime << " minutes"
-        << "\n\t\tSteep Temp: " << steepTemp << " degrees F" << std::endl;
+        << "\n\t\tSteep Temp: " << steepTemp << " degrees F\n" 
+        "Please insert Tempature sensor" << std::endl;
     enterToCont();
 
     //wait for temp to be in range for steeping
@@ -62,15 +63,16 @@ void TeaTimer::startAndExe()
     
     soundAlarm();
 
-    std::cout << "Please insert Tea..." << std::endl;
+    std::cout << "Please remove sensor and insert Tea." << std::endl;
     enterToCont();
 
     startTimer(steepTime);
 
+    soundAlarm();
+    
     system("clear");
     std::cout << "Please remove tea bag.  Your tea is ready, enjoy!!!" << std::endl;
-
-    soundAlarm();
+    enterToCont();
 }
 
 TeaType TeaTimer::getTeaType()
@@ -159,7 +161,7 @@ void TeaTimer::soundAlarm()
 
     //sound alarm for 2 seconds
     system("speaker-test -t sine -f 1000 -l 1 & sleep 2 && kill -9 $! > /dev/null 2>&1");
-    enterToCont();
+    system("clear");
 }
 
 void TeaTimer::enterToCont()
