@@ -40,6 +40,7 @@ class TeaTimer
         static const int teaData[numTeaType][numTeaStrength][dataPts];
         
     private:
+		const int tempTol = 2;
         TeaType selTea = TYPE_NA; //to hold the selected tea type
         TeaStrength selStrength = STRENGTH_NA; // to hold the selected strength for the tea
         TemperatureReader tempReader; //to hold the temperature reader

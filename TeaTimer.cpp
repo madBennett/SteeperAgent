@@ -50,9 +50,10 @@ void TeaTimer::startAndExe()
 
     //wait for temp to be in range for steeping
     double currentTemp = tempReader.getTemp();
-    while (currentTemp < steepTemp)
+    while ((currentTemp < steepTemp - tempTol) || (currentTemp > steepTemp + tempTol))
     {
         //waiting
+        std::cout << "Waiting for water to reach steeping tempature" << std::endl;
         std::cout << "Current Temp: " << currentTemp << " degrees F" << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
         system("clear");
@@ -157,7 +158,7 @@ void TeaTimer::soundAlarm()
     //returns: n/a
 
     //sound alarm for 2 seconds
-    system("speaker-test -t sine -f 1000 -l 1 & sleep 2 && kill -9 $!");
+    system("speaker-test -t sine -f 1000 -l 1 & sleep 2 && kill -9 $! > /dev/null 2>&1");
     enterToCont();
 }
 
