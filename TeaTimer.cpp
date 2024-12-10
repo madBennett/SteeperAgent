@@ -19,21 +19,24 @@ const int TeaTimer::teaData[numTeaType][numTeaStrength][dataPts] = {
     {{/*Weak*/ 140, 1}, {/*Moderate*/ 163, 2}, {/*Strong*/ 185, 3}}, //Green
     {{/*Weak*/ 160, 1}, {/*Moderate*/ 167, 2}, {/*Strong*/ 185, 3}}, //White
     {{/*Weak*/ 200, 5}, {/*Moderate*/ 200, 6}, {/*Strong*/ 200, 7}}, //Herbal
-    {{/*Weak*/ 80, 1}, {/*Moderate*/ 80, 1}, {/*Strong*/ 80, 1}} //Null  //TODO::REPLACE WITH NULL VALUES
+    {{/*Weak*/ 0, 0}, {/*Moderate*/ 0, 0}, {/*Strong*/ 0, 0}} //Null  
 };
 
 const std::string TeaTimer::TeaTypeStringKey[] = {"Black", "Green", "White", "Herbal", ""};
 const std::string TeaTimer::TeaStrnStringKey[] = {"Weak", "Moderate", "Strong", ""};
 
-TeaTimer::TeaTimer(){}
+TeaTimer::TeaTimer()
+{
+    selTea = TYPE_NA; 
+    selStrength = STRENGTH_NA;
+    tempReader = TemperatureReader();
+}
 
 void TeaTimer::startAndExe()
 {
     //Function to start and exicute the steeper agent
     //para: n/a
     //returns: n/a
-
-    tempReader = TemperatureReader();
 
     selTea = getTeaType();
     selStrength = getTeaStrength();
@@ -65,7 +68,8 @@ void TeaTimer::startAndExe()
 
     std::cout << "Please remove sensor and insert Tea." << std::endl;
     enterToCont();
-
+    
+    std::cout << "Tea is steeping..." << std::endl;
     startTimer(steepTime);
 
     soundAlarm();
@@ -99,15 +103,9 @@ TeaType TeaTimer::getTeaType()
         //teaType selected
         if (i >= 1 || i <= numTeaType)
         {
-            tTyp = (TeaType)(i - 1);
+            tTyp = (TeaType)(i - 1);//Scheme to match index of enum
         }
-
-        //testing  //TODO::Remove
-        if (i == 6)
-        {
-            tTyp=TYPE_NA;
-        }
-    } while (i <= 0 || i > numTeaType+1);//TODO::Remove +1
+    } while (i <= 0 || i > numTeaType);
 
     system("clear");
     return tTyp;
@@ -134,9 +132,10 @@ TeaStrength TeaTimer::getTeaStrength()
             std::exit(1);
         }
 
+        //Get tea strength
         if (i >= 1 || i <= numTeaStrength)
         {
-            tStren = (TeaStrength)(i - 1);
+            tStren = (TeaStrength)(i - 1);//Scheme to match index of enum
         }
     } while (i <= 0 || i > numTeaStrength);
 
@@ -146,10 +145,9 @@ TeaStrength TeaTimer::getTeaStrength()
 
 void TeaTimer::startTimer(int timeMin)
 {
-    //Function to display text and start a timer
+    //Function to start a timer
     //para: n/a
     //returns: N/a
-    std::cout << "Tea is steeping..." << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(timeMin * 60));
 }
 

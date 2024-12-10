@@ -1,7 +1,11 @@
 #Madison Bennett
 #id: 824800113
 
-##ADD YOURS
+##Alyssa Rivera
+##id: 825469587
+
+##Linh Tran
+##id: 828187432
 
 # CXX Make variable for compiler
 CXX=g++
