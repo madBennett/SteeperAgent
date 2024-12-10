@@ -38,6 +38,7 @@ void TeaTimer::startAndExe()
     //para: n/a
     //returns: n/a
 
+    // get tea type and strength
     selTea = getTeaType();
     selStrength = getTeaStrength();
 
@@ -64,6 +65,7 @@ void TeaTimer::startAndExe()
         currentTemp = tempReader.getTemp();
     }
     
+    // alert user that water is ready; prompt user with further instructions
     soundAlarm();
 
     std::cout << "Please remove sensor and insert Tea." << std::endl;
@@ -72,6 +74,7 @@ void TeaTimer::startAndExe()
     std::cout << "Tea is steeping..." << std::endl;
     startTimer(steepTime);
 
+    // alert user that tea is ready; prompt with further instructions
     soundAlarm();
     
     system("clear");
@@ -81,7 +84,7 @@ void TeaTimer::startAndExe()
 
 TeaType TeaTimer::getTeaType()
 {
-    //Function to create menu and get the users tera type
+    //Function to create menu and get the users tea type
     //para: n/a
     //returns: Selected tea type
 
@@ -90,11 +93,12 @@ TeaType TeaTimer::getTeaType()
     int i = 0;
     do
     {
+        //prompt user to select tea type
         system("clear");
         std::cout << "Select Tea type\n\t1. Black \n\t2. Green \n\t3. White \n\t4. Herbal \n\t5. Quit \n->";
         std::cin >> i;
 
-        //quit
+        //quit if user selects 5
         if (i == 5)
         {
             std::exit(1);
@@ -122,11 +126,12 @@ TeaStrength TeaTimer::getTeaStrength()
     int i = 0;
     do
     {
+        //prompt user to select tea strength
         system("clear");
         std::cout << "Select Tea Strength\n\t1. Weak \n\t2. Moderate \n\t3. Strong \n\t4. Quit \n->";
         std::cin >> i;
 
-        //quit
+        //quit if user selects 4
         if (i == 4)
         {
             std::exit(1);

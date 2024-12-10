@@ -23,6 +23,7 @@ TemperatureReader::TemperatureReader()
     const std::string baseDir = "/sys/bus/w1/devices/";
     std::string deviceFolder;
 
+    //find device folder
     for (const auto& entry : std::filesystem::directory_iterator(baseDir)) {
         if (entry.is_directory() && entry.path().string().find("28-") != std::string::npos) {
             deviceFolder = entry.path().string();
@@ -37,6 +38,7 @@ TemperatureReader::TemperatureReader()
     deviceFile = deviceFolder + "/w1_slave";
 }
 
+// constructor to initialize device file path
 TemperatureReader::TemperatureReader(const std::string& deviceFilePath) : deviceFile(deviceFilePath) {}
 
 std::string TemperatureReader::getRawTemp() const 
@@ -55,6 +57,7 @@ std::string TemperatureReader::getRawTemp() const
     std::string lines;
     std::string line;
 
+    //read file line by line
     while (std::getline(file, line)) {
         lines += line + "\n";
     }
